@@ -10,20 +10,34 @@
                 justify-content: center;
                 align-items: center;
                 font-weight: bold;
-                font-size: 120%;
+                font-size: 140%;
+            }
+            #out {
+                display: flex;
+                flex-direction: row;
             }
         </style>
     </head>
     <body>
-        <h1>Input</h1>
+        <h1>TEC Redshift Dumper</h1>
+        <p>This is a tool to dump <a href="https://store.steampowered.com/app/948420/EXAPUNKS_TEC_Redshift_Player/">TEC Redshift</a> discs (from <a href="https://www.zachtronics.com/exapunks/">Exapunks</a>) into a simple text format (and JSON). Drag and drop a disc (PNG image) onto the drop target below and content will appear in the corresponding text boxes.</p>
+        <p>All of the reverse-engineering comes from <a href="https://rami-sabbagh.com/TEC-Redshift-Disk-Specification/">TEC Redshift Disk Specification</a> by <a href="https://github.com/Rami-Sabbagh">Rami-Sabbagh</a>. This tool uses <a href="https://github.com/photopea/UPNG.js/">UPNG.js</a>.</p>
+        <p>Source code for this tool is available via "view source" or <a href="https://github.com/jaredkrinke/tec-redshift-dumper">this repository</a>.</p>
+        <h2>Input</h2>
         <div id="dropTarget">
-            DROP FILE HERE
+            DROP DISC IMAGE HERE
         </div>
-        <h1>Output</h1>
-        <h2>.exa</h2>
-        <textarea id="exa" cols="80" rows="30"></textarea>
-        <h2>.json</h2>
-        <textarea id="json" cols="80" rows="30"></textarea>
+        <h2>Output</h2>
+        <div id="out">
+            <div>
+                <h3>.exa</h3>
+                <textarea id="exa" cols="30" rows="30"></textarea>
+            </div>
+            <div>
+                <h3>.json</h3>
+                <textarea id="json" cols="80" rows="30"></textarea>
+            </div>
+        </div>
         <script src="upng.js"></script>
         <script src="index.js"></script>
     </body>

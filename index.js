@@ -165,14 +165,26 @@ dropTarget.addEventListener("drop", async (event) => {
         const code = readDataString();
         readDataByte(); // Code view mode
         const mode = readDataByte();
-        // TODO: Read images
-        for (let j = 0; j < 100; j++) {
-            readDataByte(); // Image bool
+
+        let image = [];
+        let defaultImage = 0;
+        for (let row = 0; row < 10; row++) {
+            const line = [];
+            for (let column = 0; column < 10; column++) {
+                line[column] = readDataByte();
+                defaultImage |= line[column];
+            }
+            image[row] = line;
+        }
+
+        if (defaultImage === 0) {
+            image = undefined;
         }
 
         exas.push({
             name,
             mode,
+            ...(image ? {image} : {}),
             code,
         });
     }
@@ -184,10 +196,10 @@ dropTarget.addEventListener("drop", async (event) => {
     };
 
     document.getElementById("exa").value =
-`; ==== ${solutionName} ====
+`; ===== ${solutionName} =====
 
 ${exas.map(exa =>
-`; ==== ${exa.name} (MODE: ${exa.mode ? "L" : "G"}) ====
+`; ==== ${exa.name} (MODE: ${exa.mode ? "L" : "G"}) ====${exa.image ? ("\n" + exa.image.map(line => `; ${line.join("")}`).join("\n")) : ""}
 ${exa.code}
 `).join("\n")}
 `;
